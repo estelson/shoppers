@@ -1,6 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:shoppers/firebase_options.dart';
+import 'dart:convert';
 
-void main() {
+void main() async {
+  // Firebase setup
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // Stripe setup
+  final String response = await rootBundle.loadString("assets/config/stripe.json");
+  final data = await json.decode(response);
+  Stripe.publishableKey = data["publishableKey"];
+
   runApp(const MyApp());
 }
 
