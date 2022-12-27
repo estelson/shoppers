@@ -52,17 +52,18 @@ class MyApp extends StatelessWidget {
               indicatorColor: Colors.transparent,
               tabs: [
                 Tab(icon: Icon(Icons.home)),
-                Tab(icon: Icon(Icons.shopping_cart)),
                 Tab(icon: Icon(Icons.person)),
+                Tab(icon: Icon(Icons.shopping_cart)),
               ],
             ),
           ),
 
           body: const TabBarView(
+            physics: BouncingScrollPhysics(),
             children: [
               HomeScreen(),
-              CheckoutScreen(),
               ProfileScreen(),
+              CheckoutScreen(),
             ],
           ),
         ),

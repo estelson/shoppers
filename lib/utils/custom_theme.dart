@@ -4,6 +4,15 @@ class CustomTheme {
   static const Color grey = Color(0xFFDFDFDF);
   static const Color yellow = Color(0xFFFFDB47);
   static const cardShadow = [BoxShadow(color: grey, blurRadius: 6, spreadRadius: 4, offset: Offset(0, 2))];
+  static const buttonShadow = [BoxShadow(color: grey, blurRadius: 3, spreadRadius: 4, offset: Offset(1, 3))];
+
+  static getCardDecoration() {
+    return BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(25),
+      boxShadow: cardShadow,
+    );
+  }
 
   static ThemeData getTheme() {
     Map<String, double> fontSize = {
