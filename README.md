@@ -10,4 +10,27 @@ A new Flutter project.
     * Copy backend-stripe-main project from https://github.com/techTutorialsYTube/backend-stripe to root Shoppers project
     * Go to backend-stripe folder and execute in terminal: npm install
     * Execute uploader.js script to populate Firestore database
-  * After this, configure Firestore rules
+  * After these steps, configure Firebase Firestore rules as follows:
+  ```properties
+     rules_version = '2';
+     service cloud.firestore {
+     match /databases/{database}/documents {
+
+       // product access
+       match /product/{products} {
+         allow read: if request.auth != null;
+       }
+    
+       // for adding to cart
+       match /customers/{userId}/cart/{document=**} {
+    	 allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+         allow create: if request.auth != null;
+       }
+    
+       // for other logged users
+       match /customers/{userId} {
+         alow read: if request.auth != null && request.auth.uid == userId;
+       }
+     }
+   }
+  ```
