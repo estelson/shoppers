@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoppers/components/grid_card.dart';
-import 'package:shoppers/screens/product.dart';
+import 'package:shoppers/screens/login.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     onCardPress() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProductScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
 
     return Container(
