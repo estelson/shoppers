@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shoppers/components/custom_button.dart';
 import 'package:shoppers/components/custom_text_input.dart';
+import 'package:shoppers/utils/application_state.dart';
 import 'package:shoppers/utils/custom_theme.dart';
 import 'package:shoppers/utils/login_data.dart';
 
@@ -34,7 +37,28 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  void loginButtonPressed() {}
+  loginError(FirebaseException e) {
+    if(e.message != "") {
+      setState(() {
+        _isLoadingButton = false;
+      });
+
+      // Need to show alert
+    }
+  }
+
+  void loginButtonPressed() {
+    setState(() {
+      _isLoadingButton = true;
+    });
+
+    ApplicationState applicationState = Provider.of<ApplicationState>(context, listen: false);
+    if(mapEquals(data, LoginData.signUp)) {
+      applicationState.signUp(_emailController.text, _passwordController.text, loginError);
+    } else {
+      applicationState.signIn(_emailController.text, _passwordController.text, loginError);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

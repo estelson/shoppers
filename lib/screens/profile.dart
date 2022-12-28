@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shoppers/components/custom_button.dart';
+import 'package:shoppers/utils/application_state.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -9,6 +11,16 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  bool _isLoadingButton = false;
+
+  void signOutButtonPressed() {
+    setState(() {
+      _isLoadingButton = true;
+    });
+
+    Provider.of<ApplicationState>(context, listen: false).signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,7 +37,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           CustomButton(
             text: "SIGN OUT",
-            onPress: () {},
+            onPress: signOutButtonPressed,
+            isLoading: _isLoadingButton,
           ),
         ],
       ),
