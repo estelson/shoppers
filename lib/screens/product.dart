@@ -1,10 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shoppers/components/custom_button.dart';
+import 'package:shoppers/models/product.dart';
+import 'package:shoppers/utils/application_state.dart';
 import 'package:shoppers/utils/custom_theme.dart';
+import 'package:shoppers/utils/firestore.dart';
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({Key? key}) : super(key: key);
+  final Product product;
+
+  const ProductScreen({Key? key, required this.product}) : super(key: key);
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -17,6 +23,8 @@ class _ProductScreenState extends State<ProductScreen> {
     setState(() {
       addButtonLoad = true;
     });
+
+    await FirestoreUtil.addToCart(Provider.of<ApplicationState>(context, listen: false).user, widget.product.id);
 
     // Add to cart
     setState(() {
@@ -42,7 +50,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         width: double.infinity,
                         child: CachedNetworkImage(
                           fit: BoxFit.cover,
-                          imageUrl: "https://www.publicdomainpictures.net/pictures/390000/velka/a-pair-of-old-combat-boots.jpg",
+                          imageUrl: widget.product.image,
                         ),
                       ),
                       Positioned(
@@ -72,16 +80,16 @@ class _ProductScreenState extends State<ProductScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.only(top: 22),
-                            child: Text("title"),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 22),
+                            child: Text(widget.product.title),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             child: Row(
-                              children: const [
-                                Text("MRP: "),
-                                Text("\$ price"),
+                              children: [
+                                const Text("MRP: "),
+                                Text("\$ ${widget.product.price}"),
                               ],
                             ),
                           ),
@@ -96,7 +104,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 20),
                             child: Text(
-                              "the items description",
+                              widget.product.description,
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ),

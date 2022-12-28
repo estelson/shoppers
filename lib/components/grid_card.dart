@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shoppers/models/product.dart';
 import 'package:shoppers/utils/custom_theme.dart';
 
 class GridCard extends StatelessWidget {
+  final Product product;
   final int index;
   final void Function() onPress;
 
-  const GridCard({Key? key, required this.index, required this.onPress}) : super(key: key);
+  const GridCard({Key? key, required this.product, required this.index, required this.onPress}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class GridCard extends StatelessWidget {
                 child: SizedBox(
                   width: double.infinity,
                   child: CachedNetworkImage(
-                    imageUrl: "https://www.publicdomainpictures.net/pictures/390000/velka/a-pair-of-old-combat-boots.jpg",
+                    imageUrl: product.image,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -36,12 +38,12 @@ class GridCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       child: Text(
-                        "Title",
+                        product.title,
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ),
                     Text(
-                      "Price",
+                      product.price.toString(),
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ]),

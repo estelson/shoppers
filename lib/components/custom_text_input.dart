@@ -52,7 +52,7 @@ class CustomTextInput extends StatelessWidget {
                   borderSide: BorderSide(width: 1, color: Colors.black),
                 ),
                 filled: true,
-                hintStyle: TextStyle(color: CustomTheme.grey),
+                hintStyle: const TextStyle(color: CustomTheme.grey),
                 hintText: placeHolder,
                 fillColor: Colors.white,
               ),

@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shoppers/models/cart.dart';
 import 'package:shoppers/utils/custom_theme.dart';
 
 class ListCard extends StatelessWidget {
-  const ListCard({Key? key}) : super(key: key);
+  final Cart cart;
+
+  const ListCard({Key? key, required this.cart}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,7 @@ class ListCard extends StatelessWidget {
                 child: SizedBox(
                   height: double.infinity,
                   child: CachedNetworkImage(
-                    imageUrl: "https://www.publicdomainpictures.net/pictures/450000/velka/mermaid-vintage-art.jpg",
+                    imageUrl: cart.image,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -37,7 +40,7 @@ class ListCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8),
                         child: Text(
-                          "title",
+                          cart.title,
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ),
@@ -45,7 +48,7 @@ class ListCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8),
                         child: Text(
-                          "Qty: 1",
+                          "Qty: ${cart.count}",
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                       ),
@@ -53,7 +56,7 @@ class ListCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8),
                         child: Text(
-                          "\$ price",
+                          "\$ ${cart.price}",
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ),

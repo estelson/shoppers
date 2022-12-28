@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shoppers/utils/common.dart';
 
 enum ApplicationLoginState { loggedOut, loggedIn }
 
@@ -38,7 +39,7 @@ class ApplicationState extends ChangeNotifier {
       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
 
       // Stripe user create
-
+      await CommonUtil.backEndCall(userCredential.user!, CommonUtil.stripeUserCreate);
     } on FirebaseAuthException catch(e) {
       errorCallBack(e);
     }

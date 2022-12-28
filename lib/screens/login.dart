@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:shoppers/components/custom_button.dart';
 import 'package:shoppers/components/custom_text_input.dart';
 import 'package:shoppers/utils/application_state.dart';
+import 'package:shoppers/utils/common.dart';
 import 'package:shoppers/utils/custom_theme.dart';
 import 'package:shoppers/utils/login_data.dart';
 
@@ -43,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
         _isLoadingButton = false;
       });
 
-      // Need to show alert
+      CommonUtil.showAlert(context, "Error processing your request", e.message.toString());
     }
   }
 

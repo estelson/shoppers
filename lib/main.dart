@@ -31,13 +31,13 @@ void main() async {
       Widget child;
       switch (applicationState.loginState) {
         case ApplicationLoginState.loggedOut:
-          child = LoginScreen();
+          child = const LoginScreen();
           break;
         case ApplicationLoginState.loggedIn:
-          child = MyApp();
+          child = const MyApp();
           break;
         default:
-          child = LoginScreen();
+          child = const LoginScreen();
       }
       return MaterialApp(theme: CustomTheme.getTheme(), home: child);
     }),
