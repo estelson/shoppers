@@ -4,7 +4,7 @@ import { getCombinedArray, getPrice } from "./CommonUtils";
 
 export const CUSTOMERS_COLLECTION = "customers";
 export const CART_COLLECTION = "cart";
-export const ORDER_COLLECTION = "order";
+export const ORDER_COLLECTION = "orders";
 export const PRODUCT_COLLECTION = "product";
 
 async function getProducts(ids: string[]): Promise<Product[]> {
