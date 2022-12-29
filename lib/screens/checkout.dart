@@ -95,7 +95,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           );
         }
 
-        return Center(
+        return const Center(
           child: Loader(),
         );
       },
